@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+
+		<typeAlias alias="moviem" 			type="com.ch.cinema.model.Moviem" />
+		<typeAlias alias="movie"  			type="com.ch.cinema.model.Movie" />	
+<!-- 		<typeAlias alias="cinema" 			type="com.ch.cinema.admin.model.Cinema" />
+		<typeAlias alias="movieSchedule" 	type="com.ch.cinema.admin.model.movieSchedule" />	
+		<typeAlias alias="bsboard"			type="com.ch.cinema.admin.model.BsBoard" />
+		<typeAlias alias="reserve"			type="com.ch.cinema.reserve.model.Reserve" />
+		<typeAlias alias="svcboard" 		type="com.ch.cinema.model.SVCBoard" />
+		<typeAlias alias="seat"				type="com.ch.cinema.reserve.model.Seat" />   -->
+
+	</typeAliases>
+	<mappers>
+		<mapper resource="moviem.xml"/>
+		<mapper resource="movie.xml" />	
+<!-- 		<mapper resource="cinema.xml"/> 
+		<mapper resource="movieSchedule.xml" />
+		<mapper resource="bsboard.xml"/>		
+		<mapper resource="reserve.xml"/>
+		<mapper resource="svcboard.xml"/>				
+		<mapper resource="seat.xml"/> -->				
+	</mappers>
+</configuration>

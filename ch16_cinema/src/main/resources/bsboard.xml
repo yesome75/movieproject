@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bsboardns">
+<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="bsboardResult" 	  type="bsboard">
+		<result property="boardno" 		column="boardno"/>
+		<result property="movie_id" 	column="movie_id"/>
+		<result property="starscore" 	column="starscore"/>
+		<result property="moviem_id" 		column="moviem_id"/>
+		<result property="content" 		column="content"/>
+		<result property="reportdate" 	column="reportdate"/>
+		
+	</resultMap>
+	<!-- <select id="list" resultMap="bsboardResult">
+		select * from bsboard order by boardno
+	</select> -->
+	<select id="list" parameterType="bsboard" resultMap="bsboardResult">
+			select * from (select a.*, rowNum rn from 
+				(select * from bsboard order by boardno desc, boardno) a) 
+				where rn between #{startRow} and #{endRow}
+	</select>
+	<select id="list_1" parameterType="bsboard" resultMap="bsboardResult">
+			select * from (select a.*, rowNum rn from 
+				(select * from bsboard where movie_id=#{movie_id} order by boardno desc, boardno) a) 
+				where rn between #{startRow} and #{endRow}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from bsboard where boardno=#{boardno}
+	</delete>
+	<select id="total" parameterType="bsboard" resultType="int">
+		select count(*) from bsboard
+	</select>
+	<select id="total1" parameterType="bsboard" resultType="int">
+		select count(*) from bsboard where movie_id=#{movie_id}
+	</select>
+	<insert id="insert" parameterType="bsboard">
+		insert into
+		bsboard(boardno,movie_id,starscore,moviem_id,content,reportdate)
+		values(board_seq.nextval,#{movie_id},#{starscore},#{moviem_id},#{content},sysdate)
+	</insert>
+	<select id="movielist" parameterType="int" resultMap="bsboardResult">
+		select * from bsboard where movie_id=#{movie_id}
+	</select>
+	<select id="getCountForMovieno" parameterType="int" resultType="int">
+		select count(*) from (select * from bsboard where movie_id=#{movie_id}  )
+	</select>
+</mapper>
+
+
